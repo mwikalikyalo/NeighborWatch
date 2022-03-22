@@ -54,13 +54,13 @@ To get the project .......
   EMAIL_PORT=587
   EMAIL_HOST_USER='email'
   EMAIL_HOST_PASSWORD='email-password'
-* python manage.py makemigrations neigbour
+* python manage.py makemigrations watch
 * Now Migrate
 * python manage.py migrate
 * Run Application
 * python3 manage.py server
 * Test Application
-* python manage.py test neighbour
+* python manage.py test watch
 * Open the application on your browser 127.0.0.1:8000.
 
 ### Technology used
