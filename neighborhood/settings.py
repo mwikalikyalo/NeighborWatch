@@ -103,12 +103,11 @@ WSGI_APPLICATION = 'neighborhood.wsgi.application'
 DATABASES = {
     'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'neighborwatch',
+            'NAME': 'watch',
             'USER': config('DB_USER', default=''),
             'PASSWORD': config('DB_PASSWORD', default=''),
         },
     }
-
 
 
 # Password validation
