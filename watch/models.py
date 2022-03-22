@@ -14,14 +14,14 @@ class Location(models.Model):
     def save_location(self):
         self.save()
 
-
+##category
 class Category(models.Model):
     category = models.CharField(max_length=100)
 
     def __str__(self):
         return self.category
 
-  
+#neighborhood
 class Neighborhood(models.Model):
     name = models.CharField(max_length=200)
     location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
@@ -48,7 +48,7 @@ class Neighborhood(models.Model):
     def update_neighborhood(cls, id, name):
       cls.objects.filter(id=id).update(name=name)  
       
-    
+#profile    
 class Profile(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     bio = models.TextField()
@@ -56,6 +56,9 @@ class Profile(models.Model):
     profile_photo = CloudinaryField('image')
     location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+      return self.username 
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
@@ -66,10 +69,9 @@ class Profile(models.Model):
     def save_user_profile(sender, instance, **kwargs):
       instance.profile.save()
 
-    def __str__(self):
-      return self.username 
+    
 
-  
+#business 
 class Business(models.Model):
     businessname = models.CharField(max_length=200)
     description = models.TextField()
