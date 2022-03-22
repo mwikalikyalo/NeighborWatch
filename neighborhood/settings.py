@@ -14,7 +14,7 @@ from pathlib import Path
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
-
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,6 +24,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-jlri6)*able(1d=539sxxko_z8^3+)2q&zo9=^a1oj__=8u^e2'
+
+# Email configurations remember to install python-decouple
+EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = 'ruweydhaabdinoor5@gmail.com'
+
+ACCOUNT_ACTIVATION_DAYS = 2
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
