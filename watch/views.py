@@ -8,10 +8,10 @@ from django.http import JsonResponse
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
-def index(request):
+def home(request):
     if request.user.profile.neighborhood == None:
         messages.success(request, 'Please fill out you Neighbourhood')
-        return redirect('uprofile')
+        return redirect('profile')
     else:
         neighbor_details = Neighborhood.objects.get(
             name=request.user.profile.neighborhood)
