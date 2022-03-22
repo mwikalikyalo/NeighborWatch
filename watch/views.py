@@ -95,3 +95,13 @@ def searchajax(request):
         'search_term':search_term
     }
     return JsonResponse(data)
+
+
+
+
+
+
+
+
+
+     
