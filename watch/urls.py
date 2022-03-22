@@ -4,9 +4,9 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-  path('index/', views.index, name='home'),
+  path('home/', views.index, name='home'),
   path('', views.profile, name='profile'),
-  path('search/', views.search, name='search'),
+  path('find/', views.find, name='search'),
   path('ajax/search/', views.searchajax, name='searchajax')
 ]
 
