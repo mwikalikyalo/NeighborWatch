@@ -8,29 +8,23 @@ from cloudinary.models import CloudinaryField
 class Location(models.Model):
     location = models.CharField(max_length=200)
 
-    def __str__(self):
-        return self.location
-
     def save_location(self):
         self.save()
 
-##category
+
 class Category(models.Model):
     category = models.CharField(max_length=100)
 
-    def __str__(self):
-        return self.category
+    def save_category(self):
+      self.save()
 
-#neighborhood
+  
 class Neighborhood(models.Model):
     name = models.CharField(max_length=200)
     location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
     securityline = models.IntegerField(null=True, blank=True)
     hospitalhelpline = models.IntegerField(null=True, blank=True)
     occupants = models.IntegerField(default=0, null=True)
-
-    def __str__(self):
-      return self.name
 
     def create_neighborhood(self):
       self.save()
@@ -47,8 +41,8 @@ class Neighborhood(models.Model):
     @classmethod
     def update_neighborhood(cls, id, name):
       cls.objects.filter(id=id).update(name=name)  
-      
-#profile    
+
+    
 class Profile(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     bio = models.TextField()
@@ -56,9 +50,6 @@ class Profile(models.Model):
     profile_photo = CloudinaryField('image')
     location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.SET_NULL, null=True, blank=True)
-
-    def __str__(self):
-      return self.username 
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
@@ -69,17 +60,12 @@ class Profile(models.Model):
     def save_user_profile(sender, instance, **kwargs):
       instance.profile.save()
 
-    
-
-#business 
+  
 class Business(models.Model):
     businessname = models.CharField(max_length=200)
     description = models.TextField()
     username = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
-
-    def __str__(self):
-      return self.businessname
 
     def save_business(self):
       self.save()
@@ -100,9 +86,6 @@ class Post(models.Model):
     timeuploaded = models.DateTimeField(auto_now_add=True)
     postuser = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
-
-    def __str__(self):
-      return self.title
 
     def save_post(self):
       self.save()
