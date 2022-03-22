@@ -10,8 +10,7 @@ class TestLocation(TestCase):
     def tearDown(self):
       Location.objects.all().delete()
 
-    def test_isinstance(self):
-      self.assertTrue(isinstance(self.location, Location))
+   
 
     def test_save_location(self):
       self.location2 = Location.objects.create(location='Nairobi')
