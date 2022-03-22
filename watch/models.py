@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 class Location(models.Model):
@@ -52,7 +53,7 @@ class Profile(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     bio = models.TextField()
     phone = models.IntegerField(null=True, blank=True)
-    profile_photo = models.ImageField(upload_to='userProfile/', default='userProfile/test.png')
+    profile_photo = CloudinaryField('image')
     location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.SET_NULL, null=True, blank=True)
 
