@@ -6,6 +6,7 @@ from django.conf import settings
 urlpatterns = [
   path('', views.home, name='home'),
   path('profile/', views.profile, name='profile'),
+  path('post/', views.create_post, name = 'post'),
   path('find/', views.find, name='search'),
   path('ajax/search/', views.searchajax, name='searchajax')
 ]

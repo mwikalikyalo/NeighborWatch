@@ -9,22 +9,24 @@ from django.http import JsonResponse
 # Create your views here.
 @login_required(login_url='/accounts/login/')
 def home(request):
-    if request.user.profile.neighborhood == None:
-        messages.success(request, 'Please fill out you Neighbourhood')
-        return redirect('profile')
-    else:
-        neighbor_details = Neighborhood.objects.get(
-            name=request.user.profile.neighborhood)
-        businesses = Business.objects.filter(
-            neighborhood=request.user.profile.neighborhood)
-        updates = Post.objects.filter(
-            neighborhood=request.user.profile.neighborhood)
+    user = request.user
+    # neighbor_details = Neighborhood.objects.get(
+    #         name=request.user.profile.neighborhood)
+    businesses = Business.objects.filter(
+        neighborhood=request.user.profile.neighborhood)
+    updates = Post.objects.filter(
+        neighborhood=request.user.profile.neighborhood)
 
-        parameters = {
-            'neighbor_details': neighbor_details,
+    parameters = {
+            # 'neighbor_details': neighbor_details,
             'businesses': businesses,
             'updates': updates,
         }
+    if not user:
+    # if request.user.profile.neighborhood == None:
+        messages.success(request, 'Please fill out you Neighbourhood')
+        return redirect('profile')
+    else:  
         return render(request, 'home.html', parameters)
         
 
@@ -57,7 +59,7 @@ def profile(request):
             post.neighborhood = current_neighbourhood
             post.save()
 
-        return redirect('updateprofile')
+        return redirect('home')
         
     current_user = Profile.objects.get(username=request.user)
     createuserform = CreateUserForm(instance=request.user)
@@ -78,6 +80,27 @@ def profile(request):
         'updates': updates
     }
     return render(request, 'profile.html', params)
+
+
+@login_required(login_url='/accounts/login/')
+def create_post(request):
+    current_user = request.user 
+    neighbourhoods = Neighborhood.objects.all() 
+
+    current_neighbourhood = request.user.profile.neighborhood
+    
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit = False)
+            post.user = current_user
+            post.neighbourhood = current_neighbourhood 
+            post.save()
+        return redirect("home")     
+    else:
+        form = PostForm()   
+
+    return render(request, 'post.html', {"form":form, "neighbourhoods":neighbourhoods})  
 
 
 @login_required(login_url='/accounts/login/')
