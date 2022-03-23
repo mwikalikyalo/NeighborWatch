@@ -8,12 +8,18 @@ from cloudinary.models import CloudinaryField
 class Location(models.Model):
     location = models.CharField(max_length=200)
 
+    def __str__(self):
+      return self.location
+
     def save_location(self):
         self.save()
 
 
 class Category(models.Model):
     category = models.CharField(max_length=100)
+
+    def __str__(self):
+      return self.category
 
     def save_category(self):
       self.save()
@@ -25,6 +31,9 @@ class Neighborhood(models.Model):
     securityline = models.IntegerField(null=True, blank=True)
     hospitalhelpline = models.IntegerField(null=True, blank=True)
     occupants = models.IntegerField(default=0, null=True)
+
+    def __str__(self):
+      return self.name
 
     def create_neighborhood(self):
       self.save()
@@ -51,6 +60,9 @@ class Profile(models.Model):
     location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.SET_NULL, null=True, blank=True)
 
+    def __str__(self):
+      return self.username 
+
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
       if created:
@@ -67,19 +79,22 @@ class Business(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
 
+    def __str__(self):
+            return self.businessname
+
     def save_business(self):
-      self.save()
+          self.save()
 
     @classmethod
     def delete_business(cls, id): 
-      cls.objects.filter(id=id).delete()
+          cls.objects.filter(id=id).delete()
 
     @classmethod
     def searchbusiness(cls, searchterm):
-      searchresults = cls.objects.filter(businessname__icontains = searchterm)
-      return searchresults  
+        searchresults = cls.objects.filter(businessname__icontains = searchterm)
+        return searchresults  
 
-  
+
 class Post(models.Model):
     title = models.CharField(max_length=200, null=False, blank=False)
     story = models.TextField()
@@ -87,6 +102,9 @@ class Post(models.Model):
     postuser = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
 
+    def __str__(self):
+      return self.title
+    
     def save_post(self):
       self.save()
 

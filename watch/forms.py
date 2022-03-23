@@ -11,7 +11,7 @@ class CreateUserForm(RegistrationForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
       model = Profile
-      fields = ['username',]
+      exclude = ['profile_photo','bio']
 
 class BusinessForm(forms.ModelForm):
   class Meta:

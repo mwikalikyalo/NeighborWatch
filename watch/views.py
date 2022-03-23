@@ -26,6 +26,7 @@ def home(request):
             'updates': updates,
         }
         return render(request, 'home.html', parameters)
+        
 
 @login_required(login_url='/accounts/login/')
 def profile(request):
@@ -77,6 +78,7 @@ def profile(request):
         'updates': updates
     }
     return render(request, 'profile.html', params)
+
 
 @login_required(login_url='/accounts/login/')
 def find(request):

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load bootstrap5 %}
 {% block content %}
+
 <div class="container create_profile">
     <div class="container-fluid">
         <div class="container-lg" id="contentWrapper">
@@ -14,9 +15,8 @@
                     <div class="col-md-12">
                         <form action="{% url 'profile' %}" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
-                            {% bootstrap_form form %}
-                            <input type="submit" class="btn btn- btn-lg" value="Post">
-                        
+                            {% bootstrap_form profileform %}
+                            <input type="submit" class="btn btn-warning btn-lg" value="Post">
                         </form>
                     </div>
                 </div>
