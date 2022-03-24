@@ -3,17 +3,15 @@
 {% block content %}
 <div class="container d-flex justify-content-center align-items-center">
   <div class="row hoodinfo">
-    <div class="col-md-6 p-3">
-      <h6>Neighborhood: </h6>
-      <h1 class="hoodname">{{ neighbor_details.name }}</h1>
-      <p>Location: {{ neighbor_details.location }}</p>
-    </div>
-    <div class="col-md-6 p-2">
-      <h6>Police Helpline:</h6>
-      <i class="fad fa-phone"></i><a href="tel:+{{ neighbor_details.securityline }}"> +254-{{ neighdetails.securityline }}</a>
-      <p></p>
-      <h6>Hospital Helpline</h6>
-      <i class="fad fa-phone"></i><a href="tel:+{{ neighbor_details.hospitalhelpline }}"> +254-{{ neighbor_details.hospitalhelpline }}</a>
+    <div class="col-md-6 p-3" >
+      <h6 style="color: #fb8500; font-size: 24px; font-weight: 700;">Neighborhood: {{ neighbor_details.name }}</h6>
+      <p style="color: #fb8500; font-size: 24px; font-weight: 700;">Location: {{ neighbor_details.location }}</p>
+      <h6 style="color: #fb8500; font-size: 24px; font-weight: 700;">Police Helpline:</h6>
+      <i class="fad fa-phone"></i><a href="tel:+{{ neighbor_details.securityline }}" 
+      style="text-decoration: none; color: #03071e;"> +254-{{ neighbor_details.securityline }}</a>
+      <h6 style="color: #fb8500; font-size: 24px; font-weight: 700;">Hospital Helpline</h6>
+      <i class="fad fa-phone"></i><a href="tel:+{{ neighbor_details.hospitalhelpline }}"
+      style="text-decoration: none; color: #03071e;"> +254-{{ neighbor_details.hospitalhelpline }}</a>
     </div>
   </div>
 </div>
@@ -21,7 +19,7 @@
 <hr>
 <div class="p-3">
   <div class="container">
-    <div class="separator mt-md-5 mb-md-5">Business</div>
+    <h5 class="separator mt-md-5 mb-md-5" style="color: #03071e; font-size: 20px; font-weight: 700;">Business</h5>
   </div>
   <form class="form-inline d-flex flex-column justify-content-center align-items-center searchdivform p-2" role="search" action='{% url "search" %}'>
     <div class="searchform">
@@ -37,11 +35,11 @@
       {% for business in businesses %}
       <div class="item p-2 m-2">
         <h4>{{ business.businessname|capfirst }}</h4>
-        <p>Description: {{ business.description }}</p>
-        <p>Seller: {{ business.username }}</p>
+        <p style="color: #03071e; font-size: 24px; font-weight: 700;">Description: {{ business.description }}</p>
+        <p style="color: #03071e; font-size: 24px; font-weight: 700;">Seller: {{ business.username }}</p>
       </div>
       {% empty %}
-      <p class="alert alert-info text-center">You don't have any Business Around</p>
+      <p class="alert alert-info text-center" style="color: #03071e; font-size: 18px; font-weight: 700;">You don't have any Business Around</p>
       {% endfor %}
     </div>
   </div>
@@ -51,7 +49,7 @@
 
 <div class="p-3">
 <div class="container">
-  <div class="separator mt-md-5 mb-md-5">Updates</div>
+  <h4 class="separator mt-md-5 mb-md-5">Updates</h4>
 </div>
 
 <div>
@@ -60,11 +58,11 @@
     <div class="story mr-3 mt-2 p-2">
       <h5>{{ updates.title|capfirst }}</h5>
       <p>{{ updates.story }}</p>
-      <sub>By {{ updates.postuser }}</sub>
+      <sub style="font-weight: 500; color: #03071e; font-size: 20px;">By: {{ updates.postuser }}</sub>
     </div>
     {% empty %}
     <div class="container">
-      <h6 class="alert alert-info text-center">No updates</h6>
+      <h6 class="alert alert-info text-center" style="color: #03071e; font-size: 28px; font-weight: 700;">No updates</h6>
     </div>
     {% endfor %}
   </div>

@@ -11,7 +11,7 @@ from django.http import JsonResponse
 def home(request):
     user = request.user
     # neighbor_details = Neighborhood.objects.get(
-    #         name=request.user.profile.neighborhood)
+    #        name=request.user.profile.neighborhood)
     businesses = Business.objects.filter(
         neighborhood=request.user.profile.neighborhood)
     updates = Post.objects.filter(
