@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/moringa/Documents/moringa/python/django/neighborwatch/virtual"
+VIRTUAL_ENV="/home/moringa/Documents/moringa/Projects/python/django/neighborwatch/virtual"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
