@@ -102,7 +102,9 @@ WSGI_APPLICATION = 'neighborhood.wsgi.application'
 
 MODE=config("MODE", default="dev")
 SECRET_KEY = config('SECRET_KEY')
-DEBUG = os.environ.get('DEBUG', True)
+# DEBUG = os.environ.get('DEBUG', True)
+
+DEBUG= config('DEBUG')
 # development
 if config('MODE')=="dev":
    DATABASES = {
